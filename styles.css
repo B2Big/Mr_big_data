@@ -5,8 +5,8 @@
 }
 
 body {
-    background: #21222c; /* Darker gray-purple for contrast */
-    color: #f8f8f2; /* Off-white */
+    background: #21222c;
+    color: #f8f8f2;
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
     position: relative;
@@ -16,40 +16,39 @@ body {
 h1, h2 {
     font-family: 'Orbitron', sans-serif;
     text-transform: uppercase;
-    color: #8be9fd; /* Cyan */
+    color: #8be9fd;
 }
 
 /* Custom Cursor */
 .cursor {
     position: fixed;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     background: radial-gradient(circle, #8be9fd 20%, transparent 80%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 12px #8be9fd; /* Slightly stronger shadow */
+    box-shadow: 0 0 8px #8be9fd;
     transition: width 0.3s, height 0.3s;
 }
 
 .cursor-trail {
     position: fixed;
-    width: 10px;
-    height: 10px;
-    background: rgba(139, 233, 253, 0.6); /* More opaque for punch */
+    width: 8px;
+    height: 8px;
+    background: rgba(216, 129, 249, 0.6);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
+    opacity: 0.8;
 }
 
-/* Particle Emissions (for cursor) */
 .cursor-particle {
     position: absolute;
     width: 4px;
     height: 4px;
-    background: #8be9fd;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9997;
@@ -73,15 +72,19 @@ h1, h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background: rgba(33, 34, 44, 0.9); /* Darker, more opaque */
+    padding: 15px 40px;
+    background: rgba(33, 34, 44, 0.9);
     z-index: 10;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ff6bc6; /* Punchier pink */
+    color: #ff6bc6;
+}
+
+.navbar-toggle {
+    display: none;
 }
 
 .nav-links {
@@ -97,7 +100,7 @@ h1, h2 {
 }
 
 .nav-links a:hover {
-    color: #383b4f; /* Darker gray */
+    color: #383b4f;
 }
 
 /* Hero Section */
@@ -118,10 +121,10 @@ h1, h2 {
 
 .data-cascade {
     position: absolute;
-    top: -50px;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 200px;
+    height: 100%;
     overflow: hidden;
     z-index: 1;
 }
@@ -132,7 +135,7 @@ h1, h2 {
 
 h1 {
     font-size: 4rem;
-    text-shadow: 0 0 12px #8be9fd; /* Stronger shadow */
+    text-shadow: 0 0 12px #8be9fd;
 }
 
 .subtitle {
@@ -145,18 +148,31 @@ h1 {
     color: #383b4f;
 }
 
+/* Boutons (Hero et Contact) */
 .cta-button {
     padding: 15px 30px;
-    background: #ff6bc6; /* Punchier pink */
+    background: #ff6bc6;
     color: #f8f8f2;
     text-decoration: none;
     border-radius: 50px;
     margin-top: 20px;
-    transition: box-shadow 0.3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(216, 129, 249, 0.5);
 }
 
 .cta-button:hover {
-    box-shadow: 0 0 20px #ff6bc6; /* Brighter glow */
+    background: #ff6bc6;
+    box-shadow: 0 0 20px #d881f9;
+    transform: scale(1.05);
+}
+
+.cta-button:active {
+    background: #d881f9;
+    box-shadow: 0 0 25px #d881f9, inset 0 0 10px #d881f9;
+    transform: scale(0.98);
 }
 
 /* About Section */
@@ -187,7 +203,7 @@ h1 {
 .stat-item span {
     display: block;
     font-size: 3rem;
-    color: #50fa7b; /* Green */
+    color: #50fa7b;
 }
 
 /* Skills Section */
@@ -207,15 +223,17 @@ h1 {
 
 .skill-card {
     padding: 30px;
-    background: rgba(56, 59, 79, 0.2); /* Darker gray tint */
+    background: rgba(56, 59, 79, 0.2);
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-    transition: box-shadow 0.3s;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
 }
 
 .skill-card:hover {
-    box-shadow: 0 0 20px #383b4f; /* Stronger contrast */
+    transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+    box-shadow: 0 0 25px #383b4f;
 }
 
 .skill-card::before {
@@ -223,7 +241,7 @@ h1 {
     position: absolute;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(139, 233, 253, 0.4), transparent); /* Punchier cyan */
+    background: radial-gradient(circle, rgba(189, 147, 249, 0.1), transparent);
     top: -50%;
     left: -50%;
     animation: orbit 6s linear infinite;
@@ -270,17 +288,31 @@ form {
     padding: 0 20px;
 }
 
+form label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #f8f8f2;
+    font-size: 1.1rem;
+}
+
 input, textarea {
     padding: 15px;
-    background: rgba(56, 59, 79, 0.4); /* More opaque for contrast */
+    background: rgba(56, 59, 79, 0.4);
     border: none;
     border-radius: 5px;
     color: #f8f8f2;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 textarea {
     resize: none;
     height: 150px;
+}
+
+form .cta-button {
+    align-self: center;
 }
 
 /* Data Pulse Lines */
@@ -304,11 +336,37 @@ section::before {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px 20px;
+        height: auto;
+    }
+    .navbar-toggle {
+        display: block;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: #f8f8f2;
+        cursor: pointer;
+        align-self: flex-end;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+        display: none;
+    }
+    .nav-links.active {
+        display: flex;
+    }
     h1 { font-size: 2.5rem; }
     .subtitle { font-size: 1.2rem; }
     .tagline { font-size: 1rem; }
-    .navbar { flex-direction: column; padding: 10px 20px; }
-    .nav-links { flex-direction: column; gap: 15px; margin-top: 10px; }
     .stats { gap: 20px; }
     .skill-card, .project-card { padding: 20px; }
+    .skill-card:hover {
+        transform: scale(1.05);
+    }
 }
