@@ -105,7 +105,7 @@ h1, h2 {
 
 /* Hero Section */
 #hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,13 +175,18 @@ h1 {
     transform: scale(0.98);
 }
 
-/* About Section */
-#about {
-    padding: 100px 20px;
+/* Sections générales */
+section {
+    padding: 120px 20px;
     text-align: center;
     position: relative;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+/* About Section */
 .about-text {
     max-width: 800px;
     margin: 0 auto 40px;
@@ -208,7 +213,7 @@ h1 {
 
 /* Skills Section */
 #skills {
-    padding: 100px 20px;
+    padding: 120px 20px;
     text-align: center;
 }
 
@@ -229,11 +234,12 @@ h1 {
     overflow: hidden;
     transition: transform 0.5s ease, box-shadow 0.3s ease;
     transform-style: preserve-3d;
+    min-height: 120px; /* Hauteur minimale pour éviter le tronquage */
 }
 
 .skill-card:hover {
     transform: rotateY(15deg) rotateX(10deg) scale(1.05);
-    box-shadow: 0 0 25px #383b4f;
+    box-shadow: 0 0 25px #d881f9;
 }
 
 .skill-card::before {
@@ -241,44 +247,18 @@ h1 {
     position: absolute;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(189, 147, 249, 0.1), transparent);
+    background: radial-gradient(circle, rgba(139, 233, 253, 0.4), transparent);
     top: -50%;
     left: -50%;
     animation: orbit 6s linear infinite;
 }
 
-/* Projects Section */
-#projects {
-    padding: 100px 20px;
-    text-align: center;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.project-card {
-    padding: 50px;
-    background: rgba(56, 59, 79, 0.2);
-    border-radius: 10px;
-    transition: box-shadow 0.3s;
-}
-
-.project-card:hover {
-    box-shadow: 0 0 20px #383b4f;
+/* Projects Section (masquée) */
+#projects.hidden {
+    display: none;
 }
 
 /* Contact Section */
-#contact {
-    padding: 100px 20px;
-    text-align: center;
-}
-
 form {
     max-width: 600px;
     margin: 40px auto;
@@ -368,5 +348,18 @@ section::before {
     .skill-card, .project-card { padding: 20px; }
     .skill-card:hover {
         transform: scale(1.05);
+    }
+    section {
+        padding: 80px 20px;
+        min-height: 60vh;
+    }
+    /* Correction pour Skills sur mobile */
+    .skills-grid {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        gap: 15px; /* Réduit pour plus d’espace vertical */
+    }
+    .skill-card {
+        min-height: 100px; /* Réduit légèrement pour mobile */
+        width: 100%; /* Assure une pleine largeur */
     }
 }

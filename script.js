@@ -1,8 +1,7 @@
 // Particles.js Smoother Data Stream Configuration
 document.addEventListener('DOMContentLoaded', function () {
-    // Ajuster dynamiquement le nombre de particules selon la taille de l’écran
     const screenWidth = window.innerWidth;
-    let particleCount = screenWidth > 1200 ? 200 : screenWidth > 768 ? 150 : 100; // Réduit sur petits écrans
+    let particleCount = screenWidth > 1200 ? 200 : screenWidth > 768 ? 150 : 100;
 
     particlesJS("particles-js", {
         "particles": {
@@ -10,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 "value": particleCount, 
                 "density": { 
                     "enable": true, 
-                    "value_area": 710 // Valeur originale pour maintenir la densité
+                    "value_area": 1000 
                 } 
             },
-            "color": { "value": ["#8be9fd", "#ff6bc6", "#d881f9", "#50fa7b"] }, //  couleurs Dracula
+            "color": { "value": ["#8be9fd", "#ff6bc6", "#d881f9", "#50fa7b"] },
             "shape": { "type": ["circle", "edge"] },
             "opacity": { 
                 "value": 0.8, 
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             "move": {
                 "enable": true,
-                "speed": 1.2, // Réduit de 2.5 à 1 pour une animation plus lente
+                "speed": 1,
                 "direction": "right",
                 "random": false,
                 "straight": false,
@@ -58,9 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
         "retina_detect": true
     });
 
-    // Explosion de particules multicolores au chargement
     const dataCascade = document.querySelector('.data-cascade');
-    const colors = ['#8be9fd', '#ff6bc6', '#d881f9', '#50fa7b']; // Dracula Theme
+    const colors = ['#8be9fd', '#ff6bc6', '#d881f9', '#50fa7b'];
     for (let i = 0; i < 150; i++) {
         const bit = document.createElement('span');
         bit.textContent = Math.random() > 0.5 ? '1' : '0';
@@ -101,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: "power3.out"
     });
 
-    // Animations de base pour les sections
     document.querySelectorAll('section').forEach(section => {
         gsap.from(section.querySelector('h2'), {
             scrollTrigger: {
@@ -125,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Enhanced Mouse Cursor Effects
     const cursor = document.querySelector('.cursor');
     const trail = document.querySelector('.cursor-trail');
     let mouseX = 0, mouseY = 0;
@@ -225,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Gestion de la soumission du formulaire avec EmailJS
     const form = document.getElementById('contact-form');
     if (form) {
         form.addEventListener('submit', function (e) {
@@ -246,7 +241,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Formulaire avec ID "contact-form" non trouvé');
     }
 
-    // Gestion du menu hamburger
     const toggleButton = document.querySelector('.navbar-toggle');
     const navLinks = document.querySelector('.nav-links');
     toggleButton.addEventListener('click', function () {
