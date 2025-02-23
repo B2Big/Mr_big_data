@@ -1,5 +1,14 @@
 // Particles.js Smoother Data Stream Configuration
 document.addEventListener('DOMContentLoaded', function () {
+    // Vérifie que GSAP et ScrollTrigger sont chargés
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.error("GSAP ou ScrollTrigger n’est pas chargé correctement.");
+        return;
+    }
+
+    // Enregistre ScrollTrigger avec GSAP
+    gsap.registerPlugin(ScrollTrigger);
+
     const screenWidth = window.innerWidth;
     let particleCount = screenWidth > 1200 ? 200 : screenWidth > 768 ? 150 : 100;
 
@@ -99,110 +108,138 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: "power3.out"
     });
 
-    // Animations pour toutes les sections
-    document.querySelectorAll('section').forEach(section => {
+    // Animations pour toutes les sections sauf #vision (simples)
+    document.querySelectorAll('section:not(#vision)').forEach(section => {
         gsap.from(section.querySelector('h2'), {
             scrollTrigger: {
                 trigger: section,
-                start: "top 80%"
+                start: "top 80%",
+                toggleActions: "play none none reverse"
             },
             opacity: 0,
             y: 50,
-            duration: 1
+            duration: 1,
+            ease: "power3.out"
         });
 
         gsap.from(section.querySelectorAll('p, .stats, .skills-grid, .projects-grid, form'), {
             scrollTrigger: {
                 trigger: section,
-                start: "top 80%"
+                start: "top 80%",
+                toggleActions: "play none none reverse"
             },
             opacity: 0,
             y: 50,
             duration: 1,
-            stagger: 0.2
+            stagger: 0.2,
+            ease: "power3.out"
         });
     });
 
-    // Animation pour #vision - Sous-sections
-    gsap.from("#vision h3", {
-        scrollTrigger: {
-            trigger: "#vision",
-            start: "top 80%"
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
-    });
-
-    gsap.from("#vision .vision-bi-text", {
-        scrollTrigger: {
-            trigger: "#vision .vision-bi-text",
-            start: "top 80%"
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: () => {
-            document.querySelector("#vision .vision-bi-text").style.opacity = "1";
+    // Animations smooth et élégantes pour #vision avec retour arrière explicite
+    // Titres h3
+    gsap.fromTo("#vision h3", 
+        {
+            opacity: 0,
+            y: 40 // État initial
+        }, 
+        {
+            scrollTrigger: {
+                trigger: "#vision",
+                start: "top 80%",
+                end: "bottom 20%", // Prolonge la zone d’animation
+                toggleActions: "play reverse play reverse" // Joue au down, reverse au up
+            },
+            opacity: 1,
+            y: 0, // État final
+            duration: 1.2,
+            stagger: 0.3,
+            ease: "power3.inOut"
         }
-    });
+    );
 
-    gsap.from("#vision .vision-text", {
-        scrollTrigger: {
-            trigger: "#vision .vision-text",
-            start: "top 80%"
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: () => {
-            document.querySelector("#vision .vision-text").style.opacity = "1";
+    // Vision BI Text - Scroll Down et Up
+    gsap.fromTo("#vision .vision-bi-text", 
+        {
+            opacity: 0,
+            x: -30 // État initial
+        }, 
+        {
+            scrollTrigger: {
+                trigger: "#vision .vision-bi-text",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse"
+            },
+            opacity: 1,
+            x: 0, // État final
+            duration: 1.5,
+            ease: "power3.inOut"
         }
-    });
+    );
 
-    gsap.from("#vision .vision-dbt-text", {
-        scrollTrigger: {
-            trigger: "#vision .vision-dbt-text",
-            start: "top 80%"
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: () => {
-            document.querySelector("#vision .vision-dbt-text").style.opacity = "1";
+    // Vision Text - Scroll Down et Up
+    gsap.fromTo("#vision .vision-text", 
+        {
+            opacity: 0,
+            x: 30 // État initial
+        }, 
+        {
+            scrollTrigger: {
+                trigger: "#vision .vision-text",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse"
+            },
+            opacity: 1,
+            x: 0, // État final
+            duration: 1.5,
+            ease: "power3.inOut"
         }
-    });
+    );
 
-    gsap.from("#vision .vision-points p", {
-        scrollTrigger: {
-            trigger: "#vision .vision-points",
-            start: "top 80%"
-        },
-        opacity: 0,
-        x: -50,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
-    });
-
-    gsap.from("#vision .vision-dbt-text", {
-        scrollTrigger: {
-            trigger: "#vision .vision-dbt-text",
-            start: "top 80%"
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: () => {
-            document.querySelector("#vision .vision-dbt-text").style.opacity = "1";
+    // Vision DBT Text - Scroll Down et Up
+    gsap.fromTo("#vision .vision-dbt-text", 
+        {
+            opacity: 0,
+            y: 50,
+            scale: 0.95 // État initial
+        }, 
+        {
+            scrollTrigger: {
+                trigger: "#vision .vision-dbt-text",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse"
+            },
+            opacity: 1,
+            y: 0,
+            scale: 1, // État final
+            duration: 1.8,
+            ease: "power3.inOut"
         }
-    });
+    );
+
+    // Vision Points - Scroll Down et Up
+    gsap.fromTo("#vision .vision-points p", 
+        {
+            opacity: 0,
+            y: 20 // État initial
+        }, 
+        {
+            scrollTrigger: {
+                trigger: "#vision .vision-points",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse"
+            },
+            opacity: 1,
+            y: 0, // État final
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.inOut"
+        }
+    );
 
     const cursor = document.querySelector('.cursor');
     const trail = document.querySelector('.cursor-trail');
@@ -328,4 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleButton.addEventListener('click', function () {
         navLinks.classList.toggle('active');
     });
+
+    // Rafraîchir ScrollTrigger après le chargement
+    ScrollTrigger.refresh();
 });
