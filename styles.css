@@ -138,6 +138,7 @@ h1, h2, h3 {
 .hero-content {
     max-width: 800px;
     position: relative;
+    width: 100%;
 }
 
 .data-cascade {
@@ -184,6 +185,8 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 0 8px rgba(216, 129, 249, 0.5);
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .cta-button:hover {
@@ -281,40 +284,31 @@ section {
 /* Vision Section */
 #vision {
     padding: var(--spacing-xlarge) var(--spacing-large);
-    text-align: center;
+    text-align: left; /* Alignement gauche pour homogénéité */
 }
 
 #vision h3 {
     font-size: 1.8rem;
     margin: var(--spacing-xlarge) 0 var(--spacing-large);
+    text-align: center; /* Titres restent centrés */
 }
 
-.vision-bi-text {
-    max-width: 800px;
-    margin: 0 auto var(--spacing-xlarge);
-    font-size: 1.2rem;
-    color: var(--vision-text-color);
-    opacity: 1;
-}
-
-.vision-text {
-    max-width: 800px;
-    margin: 0 auto var(--spacing-xlarge);
-    font-size: 1.2rem;
-    color: var(--vision-text-color);
-    opacity: 1;
-}
-
+.vision-bi-text,
+.vision-text,
 .vision-dbt-text {
-    max-width: 800px;
-    margin: 0 auto var(--spacing-xlarge);
+    width: 600px; /* Largeur fixe pour une forme carrée homogène */
+    max-width: 100%; /* S’adapte aux petits écrans */
+    margin: 0 auto var(--spacing-xlarge); /* Centré horizontalement */
     font-size: 1.2rem;
     color: var(--vision-text-color);
     opacity: 1;
+    text-align: justify; /* Justification pour une lecture agréable */
+    line-height: 1.6; /* Hauteur de ligne améliorée */
 }
 
 .vision-points {
-    max-width: 800px;
+    width: 600px; /* Même largeur pour cohérence */
+    max-width: 100%;
     margin: 0 auto;
     text-align: left;
     font-size: 1.1rem;
@@ -417,11 +411,21 @@ section::before {
     .nav-links.active {
         display: flex;
     }
-    h1 { font-size: 2.5rem; }
-    .subtitle { font-size: 1.2rem; }
-    .tagline { font-size: 1rem; }
-    .stats { gap: var(--spacing-medium); }
-    .skill-card { padding: var(--spacing-small); }
+    h1 { 
+        font-size: 2.5rem; 
+    }
+    .subtitle { 
+        font-size: 1.2rem; 
+    }
+    .tagline { 
+        font-size: 1rem; 
+    }
+    .stats { 
+        gap: var(--spacing-medium); 
+    }
+    .skill-card { 
+        padding: var(--spacing-small); 
+    }
     .skill-card:hover {
         transform: scale(1.05);
     }
@@ -438,27 +442,40 @@ section::before {
         min-height: 100px;
         width: 100%;
     }
+    #vision {
+        padding: var(--spacing-large) var(--spacing-medium);
+    }
     #vision h3 {
         font-size: 1.5rem;
         margin: var(--spacing-large) 0 var(--spacing-medium);
     }
-    .vision-bi-text {
-        font-size: 1rem;
-        padding: 0 var(--spacing-small);
-        margin-bottom: var(--spacing-large);
-    }
-    .vision-text {
-        font-size: 1rem;
-        padding: 0 var(--spacing-small);
-        margin-bottom: var(--spacing-large);
-    }
+    .vision-bi-text,
+    .vision-text,
     .vision-dbt-text {
-        font-size: 1rem;
+        width: 100%; /* Pleine largeur sur mobile */
         padding: 0 var(--spacing-small);
         margin-bottom: var(--spacing-large);
+        font-size: 1rem;
+        text-align: justify; /* Justification maintenue */
     }
     .vision-points {
-        font-size: 0.9rem;
+        width: 100%;
         padding: 0 var(--spacing-small);
+        font-size: 0.9rem;
+    }
+    /* Correction pour le bouton en mobile */
+    #hero {
+        padding: var(--spacing-medium);
+    }
+    .hero-content {
+        max-width: 100%;
+        padding: 0 var(--spacing-small);
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin-top: var(--spacing-small);
+        width: auto;
+        max-width: 90%;
     }
 }

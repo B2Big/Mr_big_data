@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "value": particleCount, 
                 "density": { 
                     "enable": true, 
-                    "value_area": 1000 
+                    "value_area": 800 
                 } 
             },
             "color": { "value": ["#8be9fd", "#ff6bc6", "#d881f9", "#50fa7b"] },
