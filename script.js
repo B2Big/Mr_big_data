@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: "power3.out"
     });
 
+    // Animations pour toutes les sections
     document.querySelectorAll('section').forEach(section => {
         gsap.from(section.querySelector('h2'), {
             scrollTrigger: {
@@ -120,6 +121,87 @@ document.addEventListener('DOMContentLoaded', function () {
             duration: 1,
             stagger: 0.2
         });
+    });
+
+    // Animation pour #vision - Sous-sections
+    gsap.from("#vision h3", {
+        scrollTrigger: {
+            trigger: "#vision",
+            start: "top 80%"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+    });
+
+    gsap.from("#vision .vision-bi-text", {
+        scrollTrigger: {
+            trigger: "#vision .vision-bi-text",
+            start: "top 80%"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        onComplete: () => {
+            document.querySelector("#vision .vision-bi-text").style.opacity = "1";
+        }
+    });
+
+    gsap.from("#vision .vision-text", {
+        scrollTrigger: {
+            trigger: "#vision .vision-text",
+            start: "top 80%"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        onComplete: () => {
+            document.querySelector("#vision .vision-text").style.opacity = "1";
+        }
+    });
+
+    gsap.from("#vision .vision-dbt-text", {
+        scrollTrigger: {
+            trigger: "#vision .vision-dbt-text",
+            start: "top 80%"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        onComplete: () => {
+            document.querySelector("#vision .vision-dbt-text").style.opacity = "1";
+        }
+    });
+
+    gsap.from("#vision .vision-points p", {
+        scrollTrigger: {
+            trigger: "#vision .vision-points",
+            start: "top 80%"
+        },
+        opacity: 0,
+        x: -50,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out"
+    });
+
+    gsap.from("#vision .vision-dbt-text", {
+        scrollTrigger: {
+            trigger: "#vision .vision-dbt-text",
+            start: "top 80%"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power3.out",
+        onComplete: () => {
+            document.querySelector("#vision .vision-dbt-text").style.opacity = "1";
+        }
     });
 
     const cursor = document.querySelector('.cursor');
