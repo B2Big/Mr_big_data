@@ -9,17 +9,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Enregistre ScrollTrigger avec GSAP
     gsap.registerPlugin(ScrollTrigger);
 
+    // Nombre de particules adaptatif selon la taille de l'écran
     const screenWidth = window.innerWidth;
     let particleCount = screenWidth > 1200 ? 200 : screenWidth > 768 ? 150 : 100;
+    let explosionParticleCount = screenWidth > 1200 ? 50 : screenWidth > 768 ? 30 : 20; // Nombre réduit
 
+    // Configuration de particlesJS
     particlesJS("particles-js", {
         "particles": {
             "number": { 
                 "value": particleCount, 
-                "density": { 
-                    "enable": true, 
-                    "value_area": 800 
-                } 
+                "density": { "enable": true, "value_area": 800 } 
             },
             "color": { "value": ["#8be9fd", "#ff6bc6", "#d881f9", "#50fa7b"] },
             "shape": { "type": ["circle", "edge"] },
@@ -66,9 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
         "retina_detect": true
     });
 
+    // Explosion de particules
     const dataCascade = document.querySelector('.data-cascade');
     const colors = ['#8be9fd', '#ff6bc6', '#d881f9', '#50fa7b'];
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < explosionParticleCount; i++) {
         const bit = document.createElement('span');
         bit.textContent = Math.random() > 0.5 ? '1' : '0';
         bit.style.position = 'absolute';
@@ -77,21 +78,24 @@ document.addEventListener('DOMContentLoaded', function () {
         bit.style.fontSize = `${Math.random() * 0.8 + 0.4}rem`;
         bit.style.color = colors[Math.floor(Math.random() * colors.length)];
         bit.style.opacity = 1;
+        bit.style.willChange = 'transform'; // Optimisation pour le rendu
+        bit.style.transform = 'translateZ(0)'; // Forcer l'accélération matérielle
+        bit.style.backfaceVisibility = 'hidden'; // Améliorer le rendu
         dataCascade.appendChild(bit);
     }
 
+    // Animation GSAP optimisée pour l'explosion
     gsap.to('.data-cascade span', {
-        x: () => (Math.random() - 0.5) * 300,
-        y: () => (Math.random() - 0.5) * 300,
-        scale: () => Math.random() * 1 + 0.5,
-        rotation: () => Math.random() * 180,
+        x: () => (Math.random() - 0.5) * 100, // Amplitude réduite à 100px
+        y: () => (Math.random() - 0.5) * 100, // Amplitude réduite à 100px
         opacity: 0,
-        duration: 1.8,
-        stagger: 0.015,
-        ease: "power2.out",
+        duration: 3, // Durée augmentée à 3 secondes
+        stagger: 0.05, // Espacement plus important
+        ease: "power1.out", // Easing simple et fluide
         onComplete: () => gsap.set('.data-cascade', { display: 'none' })
     });
 
+    // Animation du texte
     gsap.from(".animate-text", {
         opacity: 0,
         y: 50,
@@ -101,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: "power3.out"
     });
 
+    // Animation de la navbar
     gsap.from(".navbar", {
         opacity: 0,
         y: -50,
@@ -108,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ease: "power3.out"
     });
 
-    // Animations pour toutes les sections sauf #vision (simples)
+    // Animations pour les sections (sauf #vision)
     document.querySelectorAll('section:not(#vision)').forEach(section => {
         gsap.from(section.querySelector('h2'), {
             scrollTrigger: {
@@ -136,34 +141,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Animations smooth et élégantes pour #vision avec retour arrière explicite
-    // Titres h3
+    // Animations pour la section #vision
     gsap.fromTo("#vision h3", 
-        {
-            opacity: 0,
-            y: 40 // État initial
-        }, 
+        { opacity: 0, y: 40 }, 
         {
             scrollTrigger: {
                 trigger: "#vision",
                 start: "top 80%",
-                end: "bottom 20%", // Prolonge la zone d’animation
-                toggleActions: "play reverse play reverse" // Joue au down, reverse au up
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse"
             },
             opacity: 1,
-            y: 0, // État final
+            y: 0,
             duration: 1.2,
             stagger: 0.3,
             ease: "power3.inOut"
         }
     );
 
-    // Vision BI Text - Scroll Down et Up
     gsap.fromTo("#vision .vision-bi-text", 
-        {
-            opacity: 0,
-            x: -30 // État initial
-        }, 
+        { opacity: 0, x: -30 }, 
         {
             scrollTrigger: {
                 trigger: "#vision .vision-bi-text",
@@ -172,18 +169,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleActions: "play reverse play reverse"
             },
             opacity: 1,
-            x: 0, // État final
+            x: 0,
             duration: 1.5,
             ease: "power3.inOut"
         }
     );
 
-    // Vision Text - Scroll Down et Up
     gsap.fromTo("#vision .vision-text", 
-        {
-            opacity: 0,
-            x: 30 // État initial
-        }, 
+        { opacity: 0, x: 30 }, 
         {
             scrollTrigger: {
                 trigger: "#vision .vision-text",
@@ -192,19 +185,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleActions: "play reverse play reverse"
             },
             opacity: 1,
-            x: 0, // État final
+            x: 0,
             duration: 1.5,
             ease: "power3.inOut"
         }
     );
 
-    // Vision DBT Text - Scroll Down et Up
     gsap.fromTo("#vision .vision-dbt-text", 
-        {
-            opacity: 0,
-            y: 50,
-            scale: 0.95 // État initial
-        }, 
+        { opacity: 0, y: 50, scale: 0.95 }, 
         {
             scrollTrigger: {
                 trigger: "#vision .vision-dbt-text",
@@ -214,18 +202,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             opacity: 1,
             y: 0,
-            scale: 1, // État final
+            scale: 1,
             duration: 1.8,
             ease: "power3.inOut"
         }
     );
 
-    // Vision Points - Scroll Down et Up
     gsap.fromTo("#vision .vision-points p", 
-        {
-            opacity: 0,
-            y: 20 // État initial
-        }, 
+        { opacity: 0, y: 20 }, 
         {
             scrollTrigger: {
                 trigger: "#vision .vision-points",
@@ -234,13 +218,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleActions: "play reverse play reverse"
             },
             opacity: 1,
-            y: 0, // État final
+            y: 0,
             duration: 1,
             stagger: 0.2,
             ease: "power3.inOut"
         }
     );
 
+    // Gestion du curseur personnalisé
     const cursor = document.querySelector('.cursor');
     const trail = document.querySelector('.cursor-trail');
     let mouseX = 0, mouseY = 0;
@@ -249,18 +234,8 @@ document.addEventListener('DOMContentLoaded', function () {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
-        gsap.to(cursor, { 
-            x: mouseX, 
-            y: mouseY, 
-            duration: 0.1 
-        });
-
-        gsap.to(trail, { 
-            x: mouseX, 
-            y: mouseY, 
-            duration: 0.6, 
-            ease: "power2.out" 
-        });
+        gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.1 });
+        gsap.to(trail, { x: mouseX, y: mouseY, duration: 0.6, ease: "power2.out" });
 
         if (Math.random() > 0.7) {
             const particle = document.createElement('div');
@@ -282,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Effets au survol des éléments interactifs
     document.querySelectorAll('.cta-button, .skill-card, .project-card').forEach(el => {
         el.addEventListener('mouseenter', () => {
             gsap.to(cursor, {
@@ -340,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Gestion du formulaire de contact
     const form = document.getElementById('contact-form');
     if (form) {
         form.addEventListener('submit', function (e) {
@@ -360,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Formulaire avec ID "contact-form" non trouvé');
     }
 
+    // Toggle pour la navigation mobile
     const toggleButton = document.querySelector('.navbar-toggle');
     const navLinks = document.querySelector('.nav-links');
     toggleButton.addEventListener('click', function () {
