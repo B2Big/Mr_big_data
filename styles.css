@@ -131,8 +131,9 @@ h1, h2, h3 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: var(--spacing-large);
+    padding: var(--spacing-xlarge) var(--spacing-large);
     position: relative;
+    margin-bottom: var(--spacing-xlarge);
 }
 
 .hero-content {
@@ -201,6 +202,48 @@ h1 {
     transform: scale(0.98);
 }
 
+/* Bloc SQL avant About Me */
+.sql-block {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    background: rgba(33, 34, 44, 0.9);
+    padding: var(--spacing-small);
+    border-radius: 8px;
+    border: 1px solid var(--accent-purple);
+    width: 600px;
+    max-width: 100%;
+    margin: var(--spacing-large) auto;
+    text-align: left;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    box-shadow: 0 0 10px rgba(216, 129, 249, 0.2);
+    scroll-margin-top: 90px; /* Valeur desktop */
+}
+
+.sql-keyword {
+    color: var(--accent-green);
+}
+
+.sql-name {
+    color: var(--accent-cyan);
+}
+
+.sql-alias {
+    color: var(--accent-pink);
+}
+
+.sql-function {
+    color: var(--accent-purple);
+}
+
+.sql-value {
+    color: var(--text-primary);
+}
+
+.sql-comment {
+    color: var(--hover-gray);
+}
+
 /* Sections générales */
 section {
     padding: var(--spacing-xlarge) var(--spacing-large);
@@ -211,6 +254,7 @@ section {
     flex-direction: column;
     justify-content: center;
     gap: var(--spacing-large);
+    margin-bottom: var(--spacing-large);
 }
 
 /* About Section */
@@ -284,30 +328,30 @@ section {
 /* Vision Section */
 #vision {
     padding: var(--spacing-xlarge) var(--spacing-large);
-    text-align: left; /* Alignement gauche pour homogénéité */
+    text-align: left;
 }
 
 #vision h3 {
     font-size: 1.8rem;
     margin: var(--spacing-xlarge) 0 var(--spacing-large);
-    text-align: center; /* Titres restent centrés */
+    text-align: center;
 }
 
 .vision-bi-text,
 .vision-text,
 .vision-dbt-text {
-    width: 600px; /* Largeur fixe pour une forme carrée homogène */
-    max-width: 100%; /* S’adapte aux petits écrans */
-    margin: 0 auto var(--spacing-xlarge); /* Centré horizontalement */
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto var(--spacing-xlarge);
     font-size: 1.2rem;
     color: var(--vision-text-color);
     opacity: 1;
-    text-align: justify; /* Justification pour une lecture agréable */
-    line-height: 1.6; /* Hauteur de ligne améliorée */
+    text-align: justify;
+    line-height: 1.6;
 }
 
 .vision-points {
-    width: 600px; /* Même largeur pour cohérence */
+    width: 600px;
     max-width: 100%;
     margin: 0 auto;
     text-align: left;
@@ -432,6 +476,7 @@ section::before {
     section {
         padding: var(--spacing-large) var(--spacing-medium);
         min-height: 60vh;
+        margin-bottom: var(--spacing-medium);
     }
     .skills-grid {
         grid-template-columns: 1fr;
@@ -452,20 +497,21 @@ section::before {
     .vision-bi-text,
     .vision-text,
     .vision-dbt-text {
-        width: 100%; /* Pleine largeur sur mobile */
+        width: 100%;
         padding: 0 var(--spacing-small);
         margin-bottom: var(--spacing-large);
         font-size: 1rem;
-        text-align: justify; /* Justification maintenue */
+        text-align: justify;
     }
     .vision-points {
         width: 100%;
         padding: 0 var(--spacing-small);
         font-size: 0.9rem;
     }
-    /* Correction pour le bouton en mobile */
+    /* Correction pour le bouton et espacement en mobile */
     #hero {
-        padding: var(--spacing-medium);
+        padding: var(--spacing-large) var(--spacing-medium);
+        margin-bottom: var(--spacing-large);
     }
     .hero-content {
         max-width: 100%;
@@ -477,5 +523,13 @@ section::before {
         margin-top: var(--spacing-small);
         width: auto;
         max-width: 90%;
+    }
+    /* Responsive pour le bloc SQL */
+    .sql-block {
+        font-size: 0.9rem;
+        padding: 10px;
+        width: 100%;
+        margin: var(--spacing-large) auto;
+        scroll-margin-top: 110px; /* Augmenté pour mobile */
     }
 }

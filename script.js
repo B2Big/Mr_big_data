@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Nombre de particules adaptatif selon la taille de l'écran
     const screenWidth = window.innerWidth;
     let particleCount = screenWidth > 1200 ? 200 : screenWidth > 768 ? 150 : 100;
-    let explosionParticleCount = screenWidth > 1200 ? 50 : screenWidth > 768 ? 30 : 20; // Nombre réduit
+    let explosionParticleCount = screenWidth > 1200 ? 50 : screenWidth > 768 ? 30 : 20;
 
     // Configuration de particlesJS
     particlesJS("particles-js", {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "retina_detect": true
     });
 
-    // Explosion de particules
+    // Explosion de particules optimisée
     const dataCascade = document.querySelector('.data-cascade');
     const colors = ['#8be9fd', '#ff6bc6', '#d881f9', '#50fa7b'];
     for (let i = 0; i < explosionParticleCount; i++) {
@@ -78,30 +78,32 @@ document.addEventListener('DOMContentLoaded', function () {
         bit.style.fontSize = `${Math.random() * 0.8 + 0.4}rem`;
         bit.style.color = colors[Math.floor(Math.random() * colors.length)];
         bit.style.opacity = 1;
-        bit.style.willChange = 'transform'; // Optimisation pour le rendu
-        bit.style.transform = 'translateZ(0)'; // Forcer l'accélération matérielle
-        bit.style.backfaceVisibility = 'hidden'; // Améliorer le rendu
+        bit.style.willChange = 'transform';
+        bit.style.transform = 'translateZ(0)';
+        bit.style.backfaceVisibility = 'hidden';
         dataCascade.appendChild(bit);
     }
 
-    // Animation GSAP optimisée pour l'explosion
     gsap.to('.data-cascade span', {
-        x: () => (Math.random() - 0.5) * 100, // Amplitude réduite à 100px
-        y: () => (Math.random() - 0.5) * 100, // Amplitude réduite à 100px
+        x: () => (Math.random() - 0.5) * 100,
+        y: () => (Math.random() - 0.5) * 100,
         opacity: 0,
-        duration: 3, // Durée augmentée à 3 secondes
-        stagger: 0.05, // Espacement plus important
-        ease: "power1.out", // Easing simple et fluide
+        duration: 3,
+        stagger: 0.05,
+        ease: "power1.out",
         onComplete: () => gsap.set('.data-cascade', { display: 'none' })
     });
 
-    // Animation du texte
+    // Animation des éléments avec .animate-text dans #hero
     gsap.from(".animate-text", {
         opacity: 0,
         y: 50,
         duration: 1.5,
         delay: 1.8,
-        stagger: 0.3,
+        stagger: {
+            each: 0.3,
+            from: "start"
+        },
         ease: "power3.out"
     });
 
@@ -112,6 +114,23 @@ document.addEventListener('DOMContentLoaded', function () {
         duration: 1,
         ease: "power3.out"
     });
+
+    // Animation du bloc SQL avant About Me
+    gsap.fromTo(".sql-block", 
+        { opacity: 0, y: 30 }, 
+        {
+            scrollTrigger: {
+                trigger: ".sql-block",
+                start: "top 90%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.inOut"
+        }
+    );
 
     // Animations pour les sections (sauf #vision)
     document.querySelectorAll('section:not(#vision)').forEach(section => {
