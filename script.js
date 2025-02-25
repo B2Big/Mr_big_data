@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         "particles": {
             "number": { 
                 "value": particleCount, 
-                "density": { "enable": true, "value_area": 800 } 
+                "density": { "enable": true, "value_area": 700 } 
             },
             "color": { "value": ["#8be9fd", "#ff6bc6", "#d881f9", "#50fa7b"] },
             "shape": { "type": ["circle", "edge"] },
